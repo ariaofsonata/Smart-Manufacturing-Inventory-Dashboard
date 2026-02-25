@@ -5,7 +5,7 @@ def init():
     conn = mysql.connector.connect(
         host='localhost',
         user='root',
-        password='設定的密碼',
+        password='password',
         port=3306
     )
      # 開始使用

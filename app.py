@@ -15,14 +15,14 @@ def load_data():
         host='localhost',  # 這是你本機電腦的地址
         port=3306,         # 這是 MySQL 的預設門牌號碼
         user='root',
-        password='設定的密碼', # 安裝時設定的密碼
+        password='password', # 安裝時設定的密碼
         database='my_practice'
     )
     df = pd.read_sql("SELECT * FROM products", conn)
     conn.close()
     return df
 
-st.title("🚀 我的第一個資料庫儀表板")
+st.title("🏭 智慧工廠：關鍵設備零組件監控系統")
 
 try:
     # 1. 執行函式並取得資料
@@ -31,7 +31,7 @@ try:
     # --- 加入分析師的互動元件 ---
     st.sidebar.header("📊 篩選條件")
     # 建立一個拉桿，讓使用者選擇價格範圍
-    min_price = st.sidebar.slider("最低價格篩選", 0, 50000, 10000)
+    min_price = st.sidebar.slider("篩選高單價組件 (元)", 0, 50000, 10000)
 
     # 根據拉桿數值過濾資料
     filtered_df = df[df['price'] >= min_price]
@@ -39,16 +39,16 @@ try:
     # 使用 columns 讓畫面更好看
     col1, col2 = st.columns(2)
     with col1:
-        st.metric("顯示產品數", len(filtered_df))
+        st.metric("待檢核組件數", len(filtered_df))
     with col2:
-        st.metric("平均售價", f"{filtered_df['price'].mean():,.0f} 元")
+        st.metric("組件平均成本", f"{filtered_df['price'].mean():,.0f} 元")
 
     st.dataframe(filtered_df, use_container_width=True)
     st.bar_chart(filtered_df.set_index("name")["price"])
 
     # 分析結論
     st.markdown(f"---")
-    st.write(f"💡 **分析結論：** 目前高單價產品平均單價為 {filtered_df['price'].mean():,.0f} 元。")
+    st.write(f"💡 **廠務洞察：** 目前系統監控中共有 {len(filtered_df)} 項關鍵組件價格超過預算警戒線。")
 
 except Exception as e:
     st.error(f"❌ 錯誤：無法讀取資料庫。請確認是否已執行 init_db.py。 (錯誤訊息: {e})")

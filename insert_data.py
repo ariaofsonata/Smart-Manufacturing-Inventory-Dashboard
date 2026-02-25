@@ -4,7 +4,7 @@ def insert():
     conn = mysql.connector.connect(
         host='localhost',
         user='root',
-        password='設定的密碼',
+        password='password',
         database='my_practice',
         port=3306
     )
@@ -14,9 +14,12 @@ def insert():
     cursor.execute("TRUNCATE TABLE products")
     
     test_data = [
-        ('iPhone 15', 29900),
-        ('iPad Air', 19900),
-        ('Nike Shoes', 3500)
+        ('CNC 控制器', 45000),
+        ('工業機械手臂軸承', 12500),
+        ('液壓泵浦', 28000),
+        ('伺服馬達', 35000),
+        ('光學感測模組', 8500),
+        ('精密導軌', 15000)
     ]
     
     cursor.executemany("INSERT INTO products (name, price) VALUES (%s, %s)", test_data)
