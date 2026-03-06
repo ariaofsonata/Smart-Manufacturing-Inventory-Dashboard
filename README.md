@@ -20,6 +20,7 @@
 | **版本控制** | Git / GitHub |
 
 📂 檔案結構說明
+
 api_server.py: 後端核心，負責連接 MySQL 並提供 RESTful API 接口。
 
 app.py: 前端程式，透過 requests 向 API 請求數據並呈現視覺化結果。
