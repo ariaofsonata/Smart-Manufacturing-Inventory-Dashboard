@@ -1,7 +1,8 @@
 # 專案運行順序：
 # 1. 執行 init_db.py 建立資料庫結構
 # 2. 執行 insert_data.py 匯入範例資料
-# 3. 執行 streamlit run app.py 啟動此儀表板
+# 3. 執行 python -m uvicorn api_server:app --reload 讓API連結資料庫
+# 4. 執行 streamlit run app.py 啟動此儀表板 Streamlit只向API要資料
 
 import mysql.connector
 import pandas as pd
