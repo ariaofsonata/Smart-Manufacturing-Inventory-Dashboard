@@ -27,6 +27,11 @@ app.py: 前端程式，透過 requests 向 API 請求數據並呈現視覺化結
 
 insert_data.py: 資料庫初始化工具，負責匯入範例零件數據。
 
+## 📊 系統流程圖
+* MySQL 儲存原始零件資訊（如：CNC 控制器、伺服馬達）。
+* FastAPI 讀取資料庫並轉化為 JSON 格式發佈至 /api/inventory。
+* Streamlit 抓取 JSON 數據並生成圖表。
+
 \## 🚀 快速啟動
 
 1\. 安裝環境：`pip install -r requirements.txt`
