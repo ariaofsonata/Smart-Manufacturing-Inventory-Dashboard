@@ -28,10 +28,10 @@ insert_data.py: 資料庫初始化工具，負責匯入範例零件數據。
 
 \## 🚀 快速啟動
 
-1\. 安裝環境：`pip install -r requirements.txt`
-2\. 初始化資料庫：`python init\_db.py`
-3\. 匯入範例數據：`python insert\_data.py`
-4\. 啟動後端 API：`python -m uvicorn api_server:app --reload`
-5\. 啟動網頁：`streamlit run app.py`
+\#1\. 安裝環境：`pip install -r requirements.txt`
+\#2\. 初始化資料庫：`python init\_db.py`
+\#3\. 匯入範例數據：`python insert\_data.py`
+\#4\. 啟動後端 API：`python -m uvicorn api_server:app --reload`
+\#5\. 啟動網頁：`streamlit run app.py`
 
 > \*\*注意\*\*：請在程式碼中將 `password` 修改為您的 MySQL 密碼。
