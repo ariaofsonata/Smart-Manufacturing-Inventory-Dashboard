@@ -2,6 +2,7 @@
 ### Smart Manufacturing Inventory Dashboard
 
 這是一個結合 **前後端分離架構** 的工業零件監控專案。
+
 透過 Python 生態系，實現了從資料庫存取、API 數據提供到前端網頁視覺化的完整流程。
 
 ---
@@ -35,6 +36,8 @@
 1. **Storage**: **MySQL** 儲存原始零件資訊（如：CNC 控制器、伺服馬達）。
 2. **Delivery**: **FastAPI** 讀取資料庫並轉化為 **JSON** 格式發佈至 `/api/inventory`。
 3. **Display**: **Streamlit** 透過 API 領取數據並生成視覺化圖表。
+
+---
 
 \## 🚀 快速啟動
 
