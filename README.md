@@ -5,7 +5,7 @@
 
 ---
 ## 🌟 專案亮點
-* **三層式架構**：實現了資料庫 (MySQL)、後端 (FastAPI) 與前端 (Streamlit) 的解耦。
+* **三層式架構**：實現了資料庫 (MySQL)、後端 (FastAPI) 與前端 (Streamlit) 的分層架構。
 * **真實數據同步**：API 伺服器直接串接 MySQL，確保儀表板數據與資料庫即時同步。
 * **互動式分析**：前端提供價格篩選拉桿與動態統計圖表，輔助廠務決策。
 
@@ -28,10 +28,14 @@ insert_data.py: 資料庫初始化工具，負責匯入範例零件數據。
 
 \## 🚀 快速啟動
 
-\#1\. 安裝環境：`pip install -r requirements.txt`
-\#2\. 初始化資料庫：`python init\_db.py`
-\#3\. 匯入範例數據：`python insert\_data.py`
-\#4\. 啟動後端 API：`python -m uvicorn api_server:app --reload`
-\#5\. 啟動網頁：`streamlit run app.py`
+1\. 安裝環境：`pip install -r requirements.txt`
+
+2\. 初始化資料庫：`python init\_db.py`
+
+3\. 匯入範例數據：`python insert\_data.py`
+
+4\. 啟動後端 API：`python -m uvicorn api_server:app --reload`
+
+5\. 啟動網頁：`streamlit run app.py`
 
 > \*\*注意\*\*：請在程式碼中將 `password` 修改為您的 MySQL 密碼。
