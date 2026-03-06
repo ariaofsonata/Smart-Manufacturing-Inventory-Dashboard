@@ -7,36 +7,36 @@ import mysql.connector
 import pandas as pd
 import streamlit as st
 
+# 用來向 API 領取數據
+import requests
+
 # 設定網頁標題
 st.set_page_config(page_title="智慧製造看板", page_icon="📊")
 
-def load_data():
-    conn = mysql.connector.connect(
-        host='localhost',  # 這是你本機電腦的地址
-        port=3306,         # 這是 MySQL 的預設門牌號碼
-        user='root',
-        password='password', # 安裝時設定的密碼
-        database='my_practice'
-    )
-    df = pd.read_sql("SELECT * FROM products", conn)
-    conn.close()
-    return df
+def load_data_from_api():
+    try:
+        # 💡 向你的 FastAPI 領取真實的 MySQL 數據
+        response = requests.get("http://127.0.0.1:8000/api/inventory")
+        if response.status_code == 200:
+            return pd.DataFrame(response.json())
+        else:
+            st.error("API 回傳錯誤")
+            return pd.DataFrame()
+    except Exception as e:
+        st.error(f"連不到 API 伺服器：{e}")
+        return pd.DataFrame()
 
-st.title("🏭 智慧工廠：關鍵設備零組件監控系統")
+st.title("🏭 智慧工廠：關鍵設備零組件監控系統(API 串接版)")
 
-try:
-    # 1. 執行函式並取得資料
-    df = load_data()
+df = load_data_from_api()
 
-    # --- 加入分析師的互動元件 ---
+if not df.empty:
+    # --- 互動元件 ---
     st.sidebar.header("📊 篩選條件")
-    # 建立一個拉桿，讓使用者選擇價格範圍
     min_price = st.sidebar.slider("篩選高單價組件 (元)", 0, 50000, 10000)
-
-    # 根據拉桿數值過濾資料
+    
     filtered_df = df[df['price'] >= min_price]
 
-    # 使用 columns 讓畫面更好看
     col1, col2 = st.columns(2)
     with col1:
         st.metric("待檢核組件數", len(filtered_df))
@@ -45,10 +45,5 @@ try:
 
     st.dataframe(filtered_df, use_container_width=True)
     st.bar_chart(filtered_df.set_index("name")["price"])
-
-    # 分析結論
-    st.markdown(f"---")
-    st.write(f"💡 **廠務洞察：** 目前系統監控中共有 {len(filtered_df)} 項關鍵組件價格超過預算警戒線。")
-
-except Exception as e:
-    st.error(f"❌ 錯誤：無法讀取資料庫。請確認是否已執行 init_db.py。 (錯誤訊息: {e})")
+else:
+    st.warning("目前沒有數據，請確認 FastAPI 已經啟動！")
