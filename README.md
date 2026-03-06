@@ -1,25 +1,23 @@
-🏭 智慧製造庫存監控系統 (Smart Manufacturing Inventory Dashboard)
-這是一個結合 前後端分離架構 的工業零件監控專案。透過 Python 生態系，實現了從資料庫存取、API 數據提供到前端網頁視覺化的完整流程。
+# 🏭 智慧製造庫存監控系統 
+### Smart Manufacturing Inventory Dashboard
 
-🌟 專案亮點
-三層式架構：實現了資料庫 (MySQL)、後端 (FastAPI) 與前端 (Streamlit) 的解耦。
+這是一個結合 **前後端分離架構** 的工業零件監控專案。透過 Python 生態系，實現了從資料庫存取、API 數據提供到前端網頁視覺化的完整流程。
 
-真實數據同步：API 伺服器直接串接 MySQL，確保儀表板數據與資料庫即時同步。
+---
+## 🌟 專案亮點
+* **三層式架構**：實現了資料庫 (MySQL)、後端 (FastAPI) 與前端 (Streamlit) 的解耦。
+* **真實數據同步**：API 伺服器直接串接 MySQL，確保儀表板數據與資料庫即時同步。
+* **互動式分析**：前端提供價格篩選拉桿與動態統計圖表，輔助廠務決策。
 
-互動式分析：前端提供價格篩選拉桿與動態統計圖表，輔助廠務決策。
-
-🛠️ 技術棧 (Tech Stack)
-語言：Python 3.x
-
-後端框架：FastAPI (高效能、非同步支援)
-
-前端框架：Streamlit (快速架設數據看板)
-
-資料庫：MySQL (結構化數據存儲)
-
-數據處理：Pandas
-
-版本控制：Git / GitHub
+---
+## 🛠️ 技術棧 (Tech Stack)
+| 類別 | 技術 |
+| :--- | :--- |
+| **語言** | Python 3.x |
+| **後端框架** | FastAPI (高效能、非同步支援) |
+| **前端框架** | Streamlit (快速架設數據看板) |
+| **資料庫** | MySQL (結構化數據存儲) |
+| **版本控制** | Git / GitHub |
 
 📂 檔案結構說明
 api_server.py: 後端核心，負責連接 MySQL 並提供 RESTful API 接口。
