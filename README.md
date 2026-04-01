@@ -46,7 +46,7 @@
 
 \## 🚀 快速啟動
 
-1\. 啟動資料庫 (Docker)：啟動 Docker 容器
+1\. **啟動資料庫 (Docker)**：啟動 Docker 容器
 
 請確保您的 Docker Desktop 已啟動，並執行以下指令架設 MySQL 環境：
 
@@ -54,9 +54,11 @@
 
 註：本專案使用 3307 埠號以避開本機預設衝突。
 
-2\. 安裝依賴環境：`pip install -r requirements.txt`
 
-3\. 初始化資料庫與數據：
+2\. **安裝依賴環境**：`pip install -r requirements.txt`
+
+
+3\. **初始化資料庫與數據**：
 
 依序執行以下指令以建立表格並匯入測試資料：
 
@@ -64,10 +66,11 @@
 
 `python insert\_data.py`
 
-4\. 啟動服務：
+
+4\. **啟動服務**：
 
 開啟兩個終端機分別執行：
 
  後端 API : `python init_db.py`
- 
+
  前端介面 : `streamlit run app.py`
