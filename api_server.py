@@ -15,9 +15,9 @@ def get_db_connection():
     return mysql.connector.connect(
         host='localhost',
         user='root',
-        password='password', # 請確保與 insert_data.py 一致
+        password='jiujk000', # 請確保與 insert_data.py 一致
         database='my_practice',
-        port=3306
+        port=3307
     )
 
 @app.get("/")

@@ -5,8 +5,8 @@ def init():
     conn = mysql.connector.connect(
         host='localhost',
         user='root',
-        password='password',
-        port=3306
+        password='jiujk000',
+        port=3307
     )
      # 開始使用
     cursor = conn.cursor()

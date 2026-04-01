@@ -4,9 +4,9 @@ def insert():
     conn = mysql.connector.connect(
         host='localhost',
         user='root',
-        password='password',
+        password='jiujk000',
         database='my_practice',
-        port=3306
+        port=3307
     )
     cursor = conn.cursor()
     
