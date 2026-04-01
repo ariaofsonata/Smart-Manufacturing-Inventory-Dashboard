@@ -58,7 +58,9 @@ docker run --name my-db -e MYSQL_ROOT_PASSWORD=jiujk000 -p 3307:3306 -d mysql:8.
 
 ```bash
 pip install -r requirements.txt
-Step 2. 資料庫初始化
+
+
+### Step 2. 資料庫初始化
 執行以下指令建立資料表並匯入預設的測試數據：
 
 ```bash
@@ -70,7 +72,7 @@ python init_db.py
 python insert_data.py
 
 
-Step 3. 啟動監控服務
+### Step 3. 啟動監控服務
 請開啟 兩個 終端機視窗，分別執行後端與前端服務：
 
 終端機 A (後端 API)
