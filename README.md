@@ -51,26 +51,26 @@
 首先啟動資料庫容器，並安裝必要的 Python 套件：
 
 
-# 1.1 啟動 MySQL 容器 (使用 Port 3307 避免衝突)
-```bash
+#### 1.1 啟動 MySQL 容器 (使用 Port 3307 避免衝突)
+````bash
 `docker run --name my-db -e MYSQL_ROOT_PASSWORD=jiujk000 -p 3307:3306 -d mysql:8.0`
 
 
-# 1.2 安裝 Python 套件依賴
-```bash
-pip install -r requirements.txt
+#### 1.2 安裝 Python 套件依賴
+````bash
+`pip install -r requirements.txt`
 
 
 ### Step 2. 資料庫初始化
 執行以下指令建立資料表並匯入預設的測試數據：
 
-```bash
-# 建立資料庫結構
-python init_db.py
+#### 建立資料庫結構
+````bash
+`python init_db.py`
 
-# 匯入測試零件資料
-```bash
-python insert_data.py
+#### 匯入測試零件資料
+````bash
+`python insert_data.py`
 
 
 ### Step 3. 啟動監控服務
@@ -78,9 +78,9 @@ python insert_data.py
 
 終端機 A (後端 API)
 
-```bash
+````bash
 uvicorn api_server:app --reload
 終端機 B (前端看板)
 
-```bash
+````bash
 streamlit run app.py
