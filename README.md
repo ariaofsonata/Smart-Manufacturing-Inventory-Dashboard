@@ -31,7 +31,9 @@
 ## 📂 檔案結構說明
 * `api_server.py`: 後端核心，負責連接 MySQL 並提供 RESTful API 接口。
 * `app.py`: 前端程式，透過 `requests` 向 API 請求數據並呈現視覺化結果。
-* `insert_data.py`: 資料庫初始化工具，負責匯入範例零件數據。
+* `init_db.py`: 初始化資料庫結構（Schema）。
+* `insert_data.py`: 匯入智慧製造相關測試數據。
+* `requirements.txt`: 專案所需之 Python 套件清單。
 
 ---
 
@@ -45,20 +47,27 @@
 \## 🚀 快速啟動
 
 1\. 啟動資料庫 (Docker)：啟動 Docker 容器
+
 請確保您的 Docker Desktop 已啟動，並執行以下指令架設 MySQL 環境：
+
 `docker run --name my-db -e MYSQL_ROOT_PASSWORD=jiujk000 -p 3307:3306 -d mysql:8.0`
+
 註：本專案使用 3307 埠號以避開本機預設衝突。
 
 2\. 安裝依賴環境：`pip install -r requirements.txt`
 
 3\. 初始化資料庫與數據：
+
 依序執行以下指令以建立表格並匯入測試資料：
+
 `python init_db.py`
+
 `python insert\_data.py`
 
 4\. 啟動服務：
-開啟兩個終端機分別執行：
- 後端 API : `python init_db.py`
- 前端介面 : `streamlit run app.py`
 
+開啟兩個終端機分別執行：
+
+ 後端 API : `python init_db.py`
  
+ 前端介面 : `streamlit run app.py`
