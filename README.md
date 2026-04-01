@@ -46,32 +46,35 @@
 
 \## 🚀 快速啟動
 
-## 1. 環境準備 (Docker & Packages)
+🚀 快速啟動 (Quick Start)
+請按照以下三個階段完成環境建置與服務啟動：
+
+Step 1. 環境準備 (Docker & Packages)
 首先啟動資料庫容器，並安裝必要的 Python 套件：
-```bash
-# 啟動 MySQL 容器 (Port 3307)
+
+Bash
+# 1. 啟動 MySQL 容器 (使用 Port 3307 避免衝突)
 docker run --name my-db -e MYSQL_ROOT_PASSWORD=jiujk000 -p 3307:3306 -d mysql:8.0
-註：本專案使用 3307 埠號以避開本機預設衝突。
 
-### 安裝 Python 依賴
-```bash
+# 2. 安裝 Python 套件依賴
 pip install -r requirements.txt
+Step 2. 資料庫初始化
+執行以下指令建立資料表並匯入預設的測試數據：
 
-
-
-### 2. 資料庫初始化
-執行以下指令建立資料表並匯入測試數據：
-```bash
+Bash
+# 建立資料庫結構
 python init_db.py
+
+# 匯入測試零件資料
 python insert_data.py
+Step 3. 啟動監控服務
+請開啟 兩個 終端機視窗，分別執行後端與前端服務：
 
+終端機 A (後端 API)
 
-### 3. 啟動監控服務
-
-開啟兩個終端機分別執行：
-```bash
-# 終端機 A: 啟動後端 API
+Bash
 uvicorn api_server:app --reload
+終端機 B (前端看板)
 
-# 終端機 B: 啟動前端看板
+Bash
 streamlit run app.py
