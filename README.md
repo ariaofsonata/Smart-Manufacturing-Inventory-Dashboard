@@ -6,7 +6,7 @@
 ---
 
 ## 🌟 專案亮點
-* **雙棲運行模式**：程式碼具備自動環境偵測，可在 **本地 (Local Host)** 與 **Docker 容器** 內部無縫切換連線參數。
+* **雙運行模式**：程式碼具備自動環境偵測，可在 **本地 (Local Host)** 與 **Docker 容器** 內部無縫切換連線參數。
 * **容器化一鍵部署**：利用 Docker Compose 封裝資料庫、API 與前端看板，解決跨平台環境配置差異。
 * **API 啟動自動化**：後端 FastAPI 整合了啟動偵測邏輯，系統開啟時會自動檢查並確保 MySQL 資料庫結構 (Schema) 完整。
 * **智慧監控看板**：前端 Streamlit 透過 RESTful API 異步獲取數據，提供動態過濾與統計圖表。
@@ -52,15 +52,12 @@
     docker exec -it my-api python insert_data.py
     ```
 
----
-
 ### 3. 訪問服務門戶
 系統啟動後，可透過瀏覽器訪問以下位址：
 
 * 📊 **數據視覺化看板**：[http://localhost:8501](http://localhost:8501)
 * 🔌 **RESTful API 接口**：[http://localhost:8000/api/inventory](http://localhost:8000/api/inventory)
-
-
+---
 ### 模式二：本地開發模式 (Local Development)
 
 1. **啟動 MySQL 容器**：
