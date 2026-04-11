@@ -95,6 +95,6 @@
 
 ## 👤 作者資訊
 **Liao Yuan-shi (廖元獅)**
-* **專業背景**：11 年資深/主任機構工程師 (Senior/Supervisor Mechanical Engineer)
+* **專業背景**：11 年機構主任 ( Mechanical Supervisor )
 * **轉型領域**：數據分析 (Data Analysis) / AI 工程
 * **技術核心**：Python, SQL, Docker, Creo Parametric
