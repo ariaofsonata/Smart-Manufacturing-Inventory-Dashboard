@@ -42,6 +42,7 @@
 1. **啟動全服務**：
    ```bash
    docker-compose up -d --build
+   ```
 
 ### 2. 匯入測試資料
 當容器啟動後，你可以選擇在 Docker 內部或本機環境匯入範例零件數據：
@@ -49,10 +50,6 @@
 * **透過 Docker 執行 (推薦)**：
     ```bash
     docker exec -it my-api python insert_data.py
-    ```
-* **在本機執行**：
-    ```bash
-    python insert_data.py
     ```
 
 ---
@@ -62,7 +59,30 @@
 
 * 📊 **數據視覺化看板**：[http://localhost:8501](http://localhost:8501)
 * 🔌 **RESTful API 接口**：[http://localhost:8000/api/inventory](http://localhost:8000/api/inventory)
-* 📑 **API 自動化文件 (Swagger)**：[http://localhost:8000/docs](http://localhost:8000/docs)
+
+
+### 模式二：本地開發模式 (Local Development)
+
+1. **啟動 MySQL 容器**：
+   確保 Docker Desktop 已開啟，並啟動資料庫服務。
+2. **安裝 Python 套件**：
+   ```bash
+   pip install -r requirements.txt
+3. **初始化與啟動**：
+   ```bash
+   python init_db.py     # 建立資料表
+   python insert_data.py # 匯入資料
+   ```
+
+   #### 開啟終端機 A 啟動 API
+   ```bash
+   uvicorn api_server:app --reload
+   ```
+
+   #### 開啟終端機 B 啟動看板
+   ```bash
+   streamlit run app.py
+   ```
 
 ---
 
