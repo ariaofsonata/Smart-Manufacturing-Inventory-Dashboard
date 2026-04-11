@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: my-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: jiujk000
+      MYSQL_DATABASE: my_practice
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      # (可選) 若希望第一次啟動就建立表格
+      # - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  api:
+    build: .
+    container_name: my-api
+    command: uvicorn api_server:app --host 0.0.0.0 --port 8000
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  dashboard:
+    build: .
+    container_name: my-factory-dashboard
+    command: streamlit run app.py --server.port 8501 --server.address 0.0.0.0
+    environment:
+      API_URL: http://api:8000/api/inventory
+    ports:
+      - "8501:8501"
+    depends_on:
+      - api
+
+  # (可選) 初始化範例資料
+  data-seeder:
+    build: .
+    container_name: my-data-seeder
+    command: python insert_data.py
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+    depends_on:
+      - api
+    restart: "no"
+
+volumes:
+  db_data:

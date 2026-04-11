@@ -3,7 +3,7 @@
 # 2. 執行 insert_data.py 匯入範例資料
 # 3. 執行 python -m uvicorn api_server:app --reload 讓API連結資料庫
 # 4. 執行 streamlit run app.py 啟動此儀表板 Streamlit只向API要資料
-
+import os
 import mysql.connector
 import pandas as pd
 import streamlit as st
@@ -15,9 +15,13 @@ import requests
 st.set_page_config(page_title="智慧製造看板", page_icon="📊")
 
 def load_data_from_api():
+    # 💡 如果在 Docker 內部跑，要連到服務名稱 'api'
+    # 💡 如果你在桌機瀏覽器跑，要連到 '127.0.0.1'
+    api_url = os.getenv('API_URL', 'http://127.0.0.1:8000/api/inventory')
+
     try:
         # 💡 向你的 FastAPI 領取真實的 MySQL 數據
-        response = requests.get("http://127.0.0.1:8000/api/inventory")
+        response = requests.get(api_url)
         if response.status_code == 200:
             return pd.DataFrame(response.json())
         else:

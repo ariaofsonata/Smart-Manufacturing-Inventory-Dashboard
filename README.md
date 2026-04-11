@@ -1,77 +1,83 @@
 # 🏭 智慧製造庫存監控系統 
 ### Smart Manufacturing Inventory Dashboard
 
-這是一個結合 **前後端分離架構** 與 **容器化技術(Docker)** 的工業零件監控專案。
-
-透過 Python 生態系，實現了從資料庫存取、API 數據提供到前端網頁視覺化的完整流程。
+這是一個結合 **前後端分離架構** 與 **容器化技術 (Docker Compose)** 的工業零件監控專案。本系統模擬工廠端的零件庫存管理流程，展現了從底層資料庫存取、API 數據分發到前端視覺化看板的完整開發流程。
 
 ---
 
 ## 🌟 專案亮點
-* **容器化部署**：使用 Docker 快速配置 MySQL 環境，解決跨平台環境差異問題。
-* **三層式架構**：實現了資料庫 (MySQL)、後端 (FastAPI) 與前端 (Streamlit) 的分層架構。
-* **真實數據同步**：API 伺服器直接串接 MySQL，確保儀表板數據與資料庫即時同步。
-* **互動式分析**：前端提供價格篩選拉桿與動態統計圖表，輔助廠務決策。
+* **雙棲運行模式**：程式碼具備自動環境偵測，可在 **本地 (Local Host)** 與 **Docker 容器** 內部無縫切換連線參數。
+* **容器化一鍵部署**：利用 Docker Compose 封裝資料庫、API 與前端看板，解決跨平台環境配置差異。
+* **API 啟動自動化**：後端 FastAPI 整合了啟動偵測邏輯，系統開啟時會自動檢查並確保 MySQL 資料庫結構 (Schema) 完整。
+* **智慧監控看板**：前端 Streamlit 透過 RESTful API 異步獲取數據，提供動態過濾與統計圖表。
 
 ---
 
 ## 🛠️ 技術棧 (Tech Stack)
 | 類別 | 技術 | 說明 |
 | :--- | :--- | :--- |
-| **虛擬化** | Docker / WSL2 | 容器化資料庫環境部署 |
-| **語言** | Python 3.x | 所使用的程式語言與版本 |
-| **後端框架** | FastAPI | 高效能 RESTful API 接口開發 |
-| **前端框架** | Streamlit | 快速架設互動式數據看板 |
-| **資料庫** | MySQL | 結構化數據存儲 |
-| **數據處理** | Pandas / Requests | 資料清理與非同步請求處理 |
-| **版本控制** | Git / GitHub | 版本管理|
+| **虛擬化** | **Docker / Docker Compose** | 負責 MySQL、API、Dashboard 的環境編排與隔離 |
+| **後端框架** | **FastAPI (Python)** | 高效能非同步 API 接口，負責數據處理與庫存邏輯 |
+| **前端框架** | **Streamlit** | 快速構建工業級數據視覺化介面 |
+| **資料庫** | **MySQL 8.0** | 儲存結構化零件數據，具備資料持久化 (Volumes) 能力 |
+| **數據處理** | **Pandas / Requests** | 資料清理、轉換與服務間通訊 |
 
 ---
 
 ## 📂 檔案結構說明
-* `api_server.py`: 後端核心，負責連接 MySQL 並提供 RESTful API 接口。
-* `app.py`: 前端程式，透過 `requests` 向 API 請求數據並呈現視覺化結果。
-* `init_db.py`: 初始化資料庫結構（Schema）。
-* `insert_data.py`: 匯入智慧製造相關測試數據。
-* `requirements.txt`: 專案所需之 Python 套件清單。
+* `api_server.py`: 後端核心，具備 **Startup Event**，能自動初始化資料庫。
+* `app.py`: 前端程式，透過 `requests` 向 API 請求數據，實現前後端解耦。
+* `init_db.py`: 具備環境偵測功能的資料庫初始化腳本。
+* `insert_data.py`: 匯入智慧製造相關測試零件數據（支援本地/容器執行）。
+* `docker-compose.yml`: 定義三層架構（db, api, dashboard）的運作邏輯。
+* `Dockerfile`: 定義 Python 執行環境的構建流程。
 
 ---
 
-## 📊 系統數據流
-1. **Storage**: **MySQL** 儲存原始零件資訊（如：CNC 控制器、伺服馬達）。
-2. **Delivery**: **FastAPI** 讀取資料庫並轉化為 **JSON** 格式發佈至 `/api/inventory`。
-3. **Display**: **Streamlit** 透過 API 領取數據並生成視覺化圖表。
+## 🚀 快速啟動 (Quick Start)
+
+本專案支援兩種運行模式，請根據您的需求選擇：
+
+### 模式一：Docker 容器化部署 (推薦，一鍵啟動)
+1. **啟動全服務**：
+   ```bash
+   docker-compose up -d --build
+
+### 2. 匯入測試資料
+當容器啟動後，你可以選擇在 Docker 內部或本機環境匯入範例零件數據：
+
+* **透過 Docker 執行 (推薦)**：
+    ```bash
+    docker exec -it my-api python insert_data.py
+    ```
+* **在本機執行**：
+    ```bash
+    python insert_data.py
+    ```
 
 ---
 
-## 🚀 快速啟動
-請按照以下三個階段完成環境建置與服務啟動：
+### 3. 訪問服務門戶
+系統啟動後，可透過瀏覽器訪問以下位址：
 
-### Step 1. 環境準備 (Docker & Packages)
-首先啟動資料庫容器，並安裝必要的 Python 套件：
+* 📊 **數據視覺化看板**：[http://localhost:8501](http://localhost:8501)
+* 🔌 **RESTful API 接口**：[http://localhost:8000/api/inventory](http://localhost:8000/api/inventory)
+* 📑 **API 自動化文件 (Swagger)**：[http://localhost:8000/docs](http://localhost:8000/docs)
 
-#### 1.1 啟動 MySQL 容器 (使用 Port 3307 避免衝突)
-`docker run --name my-db -e MYSQL_ROOT_PASSWORD=jiujk000 -p 3307:3306 -d mysql:8.0`
+---
 
-#### 1.2 安裝 Python 套件依賴
-`pip install -r requirements.txt`
+## 📊 數據流架構 (Data Flow)
 
+本專案採用標準的 **三層式架構 (3-Tier Architecture)**：
 
-### Step 2. 資料庫初始化
-執行以下指令建立資料表並匯入預設的測試數據：
+1.  **Storage Layer (MySQL)**：儲存工業零件的名稱、價格與唯一識別碼，並透過 Docker Volume 實現數據持久化。
+2.  **Delivery Layer (FastAPI)**：後端負責邏輯處理，並將資料轉換為 JSON 格式，提供給前端或其他第三方系統。
+3.  **Display Layer (Streamlit)**：前端向 API 領取數據後，利用 Pandas 進行即時統計並渲染成互動式圖表。
 
-#### 2.1 建立資料庫結構
-`python init_db.py`
+---
 
-#### 2.2 匯入測試零件資料
-`python insert_data.py`
-
-
-### Step 3. 啟動監控服務
-請開啟 兩個 終端機視窗，分別執行後端與前端服務：
-
-終端機 A (後端 API)
-`uvicorn api_server:app --reload`
-
-終端機 B (前端看板)
-`streamlit run app.py`
+## 👤 作者資訊
+**Liao Yuan-shi (廖元獅)**
+* **專業背景**：11 年資深機械工程師 (Senior Mechanical Engineer)
+* **轉型領域**：數據分析 (Data Analysis) / AI 工程
+* **技術核心**：Python, SQL, Docker, Creo Parametric
